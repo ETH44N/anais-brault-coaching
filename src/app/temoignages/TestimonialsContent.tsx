@@ -148,11 +148,11 @@ export default function TestimonialsContent() {
               Prêt(e) à écrire <span className="text-gradient">ta propre histoire</span> ?
             </h2>
             <p className="text-navy-500 text-lg mb-10">
-              Chaque transformation commence par un premier pas. Le tien pourrait être un simple appel.
+              Chaque transformation commence par un premier pas. Le tien commence ici.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/contact" className="btn-primary group">
-                Réserver mon appel découverte
+                Remplir le formulaire
                 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link href="/services" className="btn-secondary">

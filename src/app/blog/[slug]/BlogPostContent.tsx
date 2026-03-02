@@ -185,10 +185,10 @@ export default function BlogPostContent() {
                 Envie d&apos;aller plus loin ?
               </h3>
               <p className="text-navy-500 mb-6 max-w-md mx-auto">
-                Réserve ton appel découverte gratuit et explore comment le coaching somatique peut transformer ta vie.
+                Remplis le formulaire et explore comment le coaching somatique peut transformer ta vie.
               </p>
               <Link href="/contact" className="btn-primary">
-                Réserver mon appel découverte
+                Remplir le formulaire
               </Link>
             </div>
           </ScrollReveal>

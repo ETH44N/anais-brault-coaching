@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -11,23 +11,23 @@ import {
   Loader2,
   Instagram,
   Mail,
-  Calendar,
   ArrowRight,
-  MessageCircle,
+  Sparkles,
 } from 'lucide-react'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Ton prénom doit contenir au moins 2 caractères'),
   email: z.string().email('Merci d\'entrer une adresse email valide'),
-  subject: z.string().min(1, 'Merci de choisir un sujet'),
-  message: z.string().min(10, 'Ton message doit contenir au moins 10 caractères'),
+  idealLife: z.string().min(10, 'Prends le temps de décrire ta vie idéale — même quelques phrases suffisent'),
+  currentSituation: z.string().min(10, 'Dis-moi où tu en es, même brièvement'),
 })
 
 type ContactFormData = z.infer<typeof contactSchema>
 
 export default function ContactContent() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
 
   const {
     register,
@@ -40,11 +40,29 @@ export default function ContactContent() {
 
   const onSubmit = async (data: ContactFormData) => {
     setStatus('loading')
-    // Placeholder: integrate with email service (SendGrid, Resend, etc.)
-    await new Promise((r) => setTimeout(r, 2000))
-    setStatus('success')
-    reset()
+    setErrorMsg('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.error || 'Erreur lors de l\'envoi.')
+      setStatus('success')
+      reset()
+    } catch (err: any) {
+      setErrorMsg(err.message || 'Une erreur est survenue. Réessaie plus tard.')
+      setStatus('error')
+    }
   }
+
+  const inputClass = (hasError: boolean) =>
+    `w-full px-5 py-3.5 rounded-xl border bg-brand-50/50 text-navy-900 placeholder:text-navy-300 focus:outline-none focus:ring-2 transition-all ${
+      hasError
+        ? 'border-red-300 focus:ring-red-200'
+        : 'border-navy-100 focus:ring-brand-200 focus:border-brand-300'
+    }`
 
   return (
     <>
@@ -77,7 +95,7 @@ export default function ContactContent() {
             transition={{ delay: 0.2 }}
             className="text-navy-500 text-lg md:text-xl max-w-2xl leading-relaxed"
           >
-            Envoie-moi un message ou réserve directement ton appel découverte gratuit.
+            Remplis ce formulaire pour que je puisse mieux te connaître.
             Chaque grande transformation commence par un premier pas.
           </motion.p>
         </div>
@@ -86,16 +104,8 @@ export default function ContactContent() {
       {/* Contact Cards */}
       <section className="section-padding bg-white pt-0 -mt-8">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
             {[
-              {
-                icon: Calendar,
-                title: 'Appel Découverte',
-                description: '30 min gratuites pour explorer tes besoins',
-                action: 'Réserver un créneau',
-                href: '#',
-                accent: 'from-brand-400 to-brand-500',
-              },
               {
                 icon: Mail,
                 title: 'Email',
@@ -139,230 +149,181 @@ export default function ContactContent() {
             })}
           </div>
 
-          {/* Contact Form */}
+          {/* Form Section */}
           <div className="grid lg:grid-cols-[1fr_1.2fr] gap-16 items-start">
             {/* Left info */}
             <ScrollReveal direction="left">
               <div>
                 <span className="text-sm font-semibold tracking-widest uppercase text-brand-500 mb-4 block">
-                  Écris-moi
+                  Formulaire
                 </span>
                 <h2 className="font-display text-3xl md:text-4xl text-navy-900 mb-6">
-                  Un message,
+                  Parle-moi de
                   <br />
-                  <span className="text-gradient">un début</span>
+                  <span className="text-gradient">toi</span>
                 </h2>
                 <p className="text-navy-500 text-lg leading-relaxed mb-8">
-                  Que tu aies une question, une envie, ou simplement un ressenti à partager,
-                  je lis chaque message personnellement et je réponds sous 48h.
+                  Avant de travailler ensemble, j&apos;ai besoin de mieux te comprendre.
+                  Réponds à ces deux questions avec ton cœur — il n&apos;y a pas de bonne
+                  ou de mauvaise réponse.
                 </p>
                 <div className="bg-brand-50 rounded-2xl p-6 border border-brand-100/50">
                   <div className="flex items-center gap-3 mb-3">
-                    <MessageCircle className="w-5 h-5 text-brand-500" />
-                    <span className="font-display font-semibold text-navy-900">Ce que tu peux me partager</span>
+                    <Sparkles className="w-5 h-5 text-brand-500" />
+                    <span className="font-display font-semibold text-navy-900">Pourquoi ces questions ?</span>
                   </div>
                   <ul className="space-y-2 text-sm text-navy-500">
-                    <li>• Tes questions sur le coaching somatique</li>
-                    <li>• Ta situation actuelle et tes objectifs</li>
-                    <li>• Tes doutes (c&apos;est normal et bienvenu)</li>
-                    <li>• Tout ce qui te traverse</li>
+                    <li>• Pour comprendre ce qui t&apos;anime profondément</li>
+                    <li>• Pour mesurer l&apos;écart entre ta vision et ta réalité</li>
+                    <li>• Pour savoir si mon accompagnement est fait pour toi</li>
+                    <li>• Pour préparer un échange qui a du sens</li>
                   </ul>
                 </div>
               </div>
             </ScrollReveal>
 
             {/* Form */}
-            <ScrollReveal direction="right">
-              <AnimatePresence mode="wait">
-                {status === 'success' ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-sage-50 rounded-3xl p-12 border border-sage-200 text-center"
+            <div>
+              {status === 'success' ? (
+                <div className="bg-sage-50 rounded-3xl p-12 border border-sage-200 text-center">
+                  <CheckCircle className="w-16 h-16 text-sage-500 mx-auto mb-6" />
+                  <h3 className="font-display text-2xl text-navy-900 mb-3">
+                    Merci pour ta confiance !
+                  </h3>
+                  <p className="text-navy-500 mb-8">
+                    J&apos;ai bien reçu tes réponses. Je les lis personnellement et je reviens vers toi très vite.
+                  </p>
+                  <button
+                    onClick={() => setStatus('idle')}
+                    className="btn-secondary"
                   >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
-                    >
-                      <CheckCircle className="w-16 h-16 text-sage-500 mx-auto mb-6" />
-                    </motion.div>
-                    <h3 className="font-display text-2xl text-navy-900 mb-3">
-                      Message envoyé !
-                    </h3>
-                    <p className="text-navy-500 mb-8">
-                      Merci pour ton message. Je te réponds sous 48h maximum.
+                    Renvoyer le formulaire
+                  </button>
+                </div>
+              ) : (
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="bg-white rounded-3xl p-8 md:p-10 shadow-lg border border-navy-100/30 space-y-6"
+                >
+                  {/* Name */}
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-navy-700 mb-2">
+                      Prénom
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      {...register('name')}
+                      className={inputClass(!!errors.name)}
+                      placeholder="Ton prénom"
+                    />
+                    {errors.name && (
+                      <p className="text-red-500 text-xs mt-1.5">{errors.name.message}</p>
+                    )}
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-navy-700 mb-2">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      {...register('email')}
+                      className={inputClass(!!errors.email)}
+                      placeholder="ton@email.com"
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-xs mt-1.5">{errors.email.message}</p>
+                    )}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="relative py-2">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-navy-100/50" />
+                    </div>
+                    <div className="relative flex justify-center">
+                      <span className="bg-white px-4 text-xs font-semibold tracking-widest uppercase text-brand-400">
+                        Tes réponses
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Question 1 */}
+                  <div>
+                    <label htmlFor="idealLife" className="block text-sm font-medium text-navy-700 mb-1">
+                      Question 1
+                    </label>
+                    <p className="text-navy-500 text-sm mb-3 leading-relaxed">
+                      Décris-moi ta vie idéale. Si tu avais une baguette magique, qu&apos;est-ce que tu
+                      changerais dans ta vie ? Comment tu aimerais te sentir plus souvent ?
                     </p>
-                    <button
-                      onClick={() => setStatus('idle')}
-                      className="btn-secondary"
-                    >
-                      Envoyer un autre message
-                    </button>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    key="form"
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="bg-white rounded-3xl p-8 md:p-10 shadow-lg border border-navy-100/30 space-y-6"
+                    <textarea
+                      id="idealLife"
+                      rows={5}
+                      {...register('idealLife')}
+                      className={`${inputClass(!!errors.idealLife)} resize-none`}
+                      placeholder="Laisse parler ton cœur..."
+                    />
+                    {errors.idealLife && (
+                      <p className="text-red-500 text-xs mt-1.5">{errors.idealLife.message}</p>
+                    )}
+                  </div>
+
+                  {/* Question 2 */}
+                  <div>
+                    <label htmlFor="currentSituation" className="block text-sm font-medium text-navy-700 mb-1">
+                      Question 2
+                    </label>
+                    <p className="text-navy-500 text-sm mb-3 leading-relaxed">
+                      Où est-ce que tu en es maintenant dans ta vie par rapport à ces objectifs ?
+                    </p>
+                    <textarea
+                      id="currentSituation"
+                      rows={5}
+                      {...register('currentSituation')}
+                      className={`${inputClass(!!errors.currentSituation)} resize-none`}
+                      placeholder="Dis-moi où tu en es aujourd'hui..."
+                    />
+                    {errors.currentSituation && (
+                      <p className="text-red-500 text-xs mt-1.5">{errors.currentSituation.message}</p>
+                    )}
+                  </div>
+
+                  {/* Error message */}
+                  {status === 'error' && errorMsg && (
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-600 text-sm text-center">
+                      {errorMsg}
+                    </div>
+                  )}
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    disabled={status === 'loading'}
+                    className="btn-primary w-full justify-center disabled:opacity-60"
                   >
-                    {/* Name */}
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-navy-700 mb-2">
-                        Prénom
-                      </label>
-                      <motion.div
-                        animate={errors.name ? { x: [-4, 4, -4, 4, 0] } : {}}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <input
-                          id="name"
-                          type="text"
-                          {...register('name')}
-                          className={`w-full px-5 py-3.5 rounded-xl border bg-brand-50/50 text-navy-900 placeholder:text-navy-300 focus:outline-none focus:ring-2 transition-all ${
-                            errors.name
-                              ? 'border-red-300 focus:ring-red-200'
-                              : 'border-navy-100 focus:ring-brand-200 focus:border-brand-300'
-                          }`}
-                          placeholder="Ton prénom"
-                        />
-                      </motion.div>
-                      <AnimatePresence>
-                        {errors.name && (
-                          <motion.p
-                            initial={{ opacity: 0, y: -5 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -5 }}
-                            className="text-red-500 text-xs mt-1.5"
-                          >
-                            {errors.name.message}
-                          </motion.p>
-                        )}
-                      </AnimatePresence>
-                    </div>
+                    {status === 'loading' ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                        Envoi en cours...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Envoyer mes réponses
+                      </>
+                    )}
+                  </button>
 
-                    {/* Email */}
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-navy-700 mb-2">
-                        Email
-                      </label>
-                      <motion.div
-                        animate={errors.email ? { x: [-4, 4, -4, 4, 0] } : {}}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <input
-                          id="email"
-                          type="email"
-                          {...register('email')}
-                          className={`w-full px-5 py-3.5 rounded-xl border bg-brand-50/50 text-navy-900 placeholder:text-navy-300 focus:outline-none focus:ring-2 transition-all ${
-                            errors.email
-                              ? 'border-red-300 focus:ring-red-200'
-                              : 'border-navy-100 focus:ring-brand-200 focus:border-brand-300'
-                          }`}
-                          placeholder="ton@email.com"
-                        />
-                      </motion.div>
-                      <AnimatePresence>
-                        {errors.email && (
-                          <motion.p
-                            initial={{ opacity: 0, y: -5 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -5 }}
-                            className="text-red-500 text-xs mt-1.5"
-                          >
-                            {errors.email.message}
-                          </motion.p>
-                        )}
-                      </AnimatePresence>
-                    </div>
-
-                    {/* Subject */}
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-navy-700 mb-2">
-                        Sujet
-                      </label>
-                      <select
-                        id="subject"
-                        {...register('subject')}
-                        className={`w-full px-5 py-3.5 rounded-xl border bg-brand-50/50 text-navy-900 focus:outline-none focus:ring-2 transition-all appearance-none ${
-                          errors.subject
-                            ? 'border-red-300 focus:ring-red-200'
-                            : 'border-navy-100 focus:ring-brand-200 focus:border-brand-300'
-                        }`}
-                      >
-                        <option value="">Choisis un sujet</option>
-                        <option value="coaching">Coaching individuel</option>
-                        <option value="seminaire">Séminaire</option>
-                        <option value="decouverte">Appel découverte</option>
-                        <option value="question">Question générale</option>
-                        <option value="autre">Autre</option>
-                      </select>
-                    </div>
-
-                    {/* Message */}
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-navy-700 mb-2">
-                        Message
-                      </label>
-                      <motion.div
-                        animate={errors.message ? { x: [-4, 4, -4, 4, 0] } : {}}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <textarea
-                          id="message"
-                          rows={5}
-                          {...register('message')}
-                          className={`w-full px-5 py-3.5 rounded-xl border bg-brand-50/50 text-navy-900 placeholder:text-navy-300 focus:outline-none focus:ring-2 transition-all resize-none ${
-                            errors.message
-                              ? 'border-red-300 focus:ring-red-200'
-                              : 'border-navy-100 focus:ring-brand-200 focus:border-brand-300'
-                          }`}
-                          placeholder="Partage ce qui te traverse..."
-                        />
-                      </motion.div>
-                      <AnimatePresence>
-                        {errors.message && (
-                          <motion.p
-                            initial={{ opacity: 0, y: -5 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -5 }}
-                            className="text-red-500 text-xs mt-1.5"
-                          >
-                            {errors.message.message}
-                          </motion.p>
-                        )}
-                      </AnimatePresence>
-                    </div>
-
-                    {/* Submit */}
-                    <motion.button
-                      type="submit"
-                      disabled={status === 'loading'}
-                      className="btn-primary w-full justify-center disabled:opacity-60"
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
-                    >
-                      {status === 'loading' ? (
-                        <>
-                          <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                          Envoi en cours...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-4 h-4 mr-2" />
-                          Envoyer mon message
-                        </>
-                      )}
-                    </motion.button>
-
-                    <p className="text-navy-400 text-xs text-center">
-                      Je réponds personnellement sous 48h maximum.
-                    </p>
-                  </motion.form>
-                )}
-              </AnimatePresence>
-            </ScrollReveal>
+                  <p className="text-navy-400 text-xs text-center">
+                    Je lis chaque réponse personnellement et je reviens vers toi rapidement.
+                  </p>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </section>

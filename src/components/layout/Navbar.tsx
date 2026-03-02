@@ -85,7 +85,7 @@ export default function Navbar() {
             ))}
             <li className="ml-4">
               <Link href="/contact" className="btn-primary text-xs px-6 py-2.5">
-                Réserver un appel
+                Commencer
               </Link>
             </li>
           </ul>
@@ -168,7 +168,7 @@ export default function Navbar() {
                 className="mt-4"
               >
                 <Link href="/contact" className="btn-gold">
-                  Réserver un appel
+                  Commencer
                 </Link>
               </motion.div>
             </div>

@@ -8,8 +8,6 @@ import {
   Check,
   Sparkles,
   Users,
-  Calendar,
-  X,
   Zap,
   Heart,
   Brain,
@@ -51,22 +49,6 @@ const services = [
     ],
     highlight: false,
   },
-  {
-    icon: Calendar,
-    title: 'Appel Découverte',
-    subtitle: 'Gratuit — 30 minutes',
-    description:
-      'Un premier échange pour explorer tes besoins, comprendre si le coaching somatique est fait pour toi, et définir ensemble la meilleure stratégie.',
-    features: [
-      'Exploration de ta situation actuelle',
-      'Identification de tes blocages principaux',
-      'Découverte de l\'approche somatique',
-      'Recommandation personnalisée',
-      'Sans engagement, 100% confidentiel',
-      'En visio, depuis où tu veux',
-    ],
-    highlight: false,
-  },
 ]
 
 const processSteps = [
@@ -103,8 +85,6 @@ const processSteps = [
 ]
 
 export default function ServicesContent() {
-  const [showBooking, setShowBooking] = useState(false)
-
   return (
     <>
       {/* Hero */}
@@ -145,8 +125,8 @@ export default function ServicesContent() {
 
       {/* Services Cards */}
       <section className="section-padding bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8">
             {services.map((service, i) => {
               const Icon = service.icon
               return (
@@ -205,13 +185,13 @@ export default function ServicesContent() {
                       ))}
                     </ul>
 
-                    <button
-                      onClick={() => setShowBooking(true)}
+                    <Link
+                      href="/contact"
                       className={service.highlight ? 'btn-gold w-full justify-center' : 'btn-secondary w-full justify-center'}
                     >
-                      {service.title === 'Appel Découverte' ? 'Réserver gratuitement' : 'En savoir plus'}
+                      Postuler
                       <ArrowRight className="ml-2 w-4 h-4" />
-                    </button>
+                    </Link>
                   </motion.div>
                 </ScrollReveal>
               )
@@ -277,7 +257,7 @@ export default function ServicesContent() {
             },
             {
               q: 'Combien de temps dure un accompagnement ?',
-              a: 'Chaque parcours est unique. En général, un accompagnement dure entre 3 et 6 mois pour permettre une transformation profonde et durable. Nous définissons ensemble la durée optimale lors de l\'appel découverte en fonction de tes objectifs.',
+              a: 'Chaque parcours est unique. En général, un accompagnement dure entre 3 et 6 mois pour permettre une transformation profonde et durable. Nous définissons ensemble la durée optimale en fonction de tes objectifs.',
             },
             {
               q: 'C\'est pour qui ?',
@@ -290,65 +270,6 @@ export default function ServicesContent() {
           ))}
         </div>
       </section>
-
-      {/* Booking Modal */}
-      <AnimatePresence>
-        {showBooking && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-900/60 backdrop-blur-sm"
-            onClick={() => setShowBooking(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: 'spring', damping: 25 }}
-              className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 md:p-12 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setShowBooking(false)}
-                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-navy-50 flex items-center justify-center text-navy-400 hover:text-navy-900 transition-colors"
-                aria-label="Fermer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-brand-100 flex items-center justify-center">
-                  <Calendar className="w-7 h-7 text-brand-500" />
-                </div>
-                <h3 className="font-display text-2xl text-navy-900 mb-3">
-                  Réserve ton appel découverte
-                </h3>
-                <p className="text-navy-500 mb-8">
-                  30 minutes pour explorer ensemble comment le coaching somatique peut transformer ta vie et ton business.
-                </p>
-                {/* Calendly placeholder */}
-                <div className="bg-navy-50 rounded-2xl p-8 mb-6 border-2 border-dashed border-navy-200">
-                  <p className="text-navy-400 text-sm">
-                    Intégration Calendly ici
-                  </p>
-                  <p className="text-navy-300 text-xs mt-2">
-                    Remplacer par : &lt;iframe src=&quot;calendly.com/anaisbrault&quot; /&gt;
-                  </p>
-                </div>
-                <a
-                  href="https://calendly.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary w-full justify-center"
-                >
-                  Ouvrir le calendrier
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </a>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   )
 }

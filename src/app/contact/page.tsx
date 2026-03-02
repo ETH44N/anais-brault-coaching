@@ -4,7 +4,7 @@ import ContactContent from './ContactContent'
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Contactez Anaïs Brault pour un appel découverte gratuit. Coaching somatique pour entrepreneurs.',
+    'Contactez Anaïs Brault pour commencer votre transformation. Coaching somatique pour entrepreneurs.',
 }
 
 export default function ContactPage() {
