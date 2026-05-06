@@ -20,10 +20,10 @@ export default function Footer() {
               <span className="text-brand-400"> ?</span>
             </h2>
             <p className="text-navy-200 max-w-xl mx-auto mb-8 text-lg">
-              Réserve ton appel découverte et explore comment le coaching somatique peut débloquer ton potentiel.
+              Une place se libère ? Postule et Anaïs t&apos;écrit personnellement.
             </p>
             <Link href="/#contact" className="btn-gold">
-              Réserver mon appel
+              Postuler
               <ArrowUpRight className="ml-2 w-4 h-4" />
             </Link>
           </div>

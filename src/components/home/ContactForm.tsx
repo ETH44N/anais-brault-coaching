@@ -48,14 +48,15 @@ export default function ContactForm() {
         <ScrollReveal>
           <div className="text-center mb-12">
             <span className="text-sm font-semibold tracking-widest uppercase text-brand-400 mb-4 block">
-              Réserver
+              Candidature
             </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
-              Réserve ton appel
-              <span className="text-brand-400"> découverte</span>
+              Postule à un
+              <span className="text-brand-400"> accompagnement</span>
             </h2>
             <p className="text-navy-300 max-w-xl mx-auto text-lg">
-              Réponds aux deux questions ci-dessous pour que je puisse t&apos;accompagner au mieux.
+              Anaïs accueille un nombre limité de personnes. Réponds à ces deux questions
+              pour qu&apos;elle évalue si l&apos;accompagnement est juste pour toi.
             </p>
           </div>
         </ScrollReveal>
@@ -75,8 +76,8 @@ export default function ContactForm() {
                 Merci{name ? `, ${name}` : ''} !
               </h3>
               <p className="text-navy-300 max-w-md mx-auto">
-                Ta candidature a bien été reçue. Anaïs te recontactera personnellement par email
-                sous 48h pour planifier votre appel.
+                Ta candidature a bien été reçue. Anaïs lit personnellement chaque réponse
+                et t&apos;écrira par email dès qu&apos;elle aura le temps de te lire avec attention.
               </p>
             </motion.div>
           ) : (
