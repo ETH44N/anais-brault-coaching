@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -49,14 +50,17 @@ export default function Navbar() {
         )}
       >
         <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          <Link href="/" className="relative z-50">
-            <motion.span
-              className="font-display text-2xl font-semibold tracking-tight text-navy-900"
-              whileHover={{ scale: 1.02 }}
-            >
-              Anaïs
-              <span className="text-brand-400"> Brault</span>
-            </motion.span>
+          <Link href="/" className="relative z-50" aria-label="Anaïs Brault — Accueil">
+            <motion.div whileHover={{ scale: 1.02 }} className="flex items-center">
+              <Image
+                src="/logo-blue.png"
+                alt="Anaïs Brault"
+                width={200}
+                height={56}
+                className="h-10 w-auto md:h-12"
+                priority
+              />
+            </motion.div>
           </Link>
 
           {/* Desktop Navigation */}

@@ -3,10 +3,21 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Quote, Star, TrendingUp, Mic, Rocket, DollarSign, Lightbulb } from 'lucide-react'
+import { ArrowRight, Quote, Star, TrendingUp, Mic, Rocket, DollarSign, Lightbulb, type LucideIcon } from 'lucide-react'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 
-const testimonials = [
+type Testimonial = {
+  name: string
+  role: string
+  icon: LucideIcon
+  quote: string
+  metric: string
+  metricLabel: string
+  accent: string
+  videoId?: string
+}
+
+const testimonials: Testimonial[] = [
   {
     name: 'Eva De Ascencao',
     role: 'Entrepreneure',
@@ -16,6 +27,7 @@ const testimonials = [
     metric: '100K€ / semaine',
     metricLabel: 'Chiffre d\'affaires',
     accent: 'from-amber-400 to-amber-500',
+    videoId: 'M5mMX5rxeME',
   },
   {
     name: 'Kanna AKA',
@@ -46,6 +58,7 @@ const testimonials = [
     metric: 'Business lancé',
     metricLabel: 'Objectifs atteints',
     accent: 'from-blue-400 to-blue-500',
+    videoId: 'yoUGL-4iAJI',
   },
   {
     name: 'Anaëlle',
@@ -170,7 +183,7 @@ function TestimonialCard({
   testimonial,
   index,
 }: {
-  testimonial: (typeof testimonials)[0]
+  testimonial: Testimonial
   index: number
 }) {
   const ref = useRef(null)
@@ -187,6 +200,17 @@ function TestimonialCard({
         <div className={`grid lg:grid-cols-[1fr_300px] ${!isEven ? 'lg:grid-cols-[300px_1fr]' : ''} gap-0`}>
           {/* Content */}
           <div className={`p-8 md:p-12 ${!isEven ? 'lg:order-2' : ''}`}>
+            {testimonial.videoId && (
+              <div className="relative aspect-video rounded-2xl overflow-hidden mb-8 shadow-lg border border-brand-100/50">
+                <iframe
+                  src={`https://www.youtube.com/embed/${testimonial.videoId}`}
+                  title={`Témoignage de ${testimonial.name}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+            )}
             <Quote className="w-10 h-10 text-brand-300/40 mb-6" />
             <blockquote className="font-display text-xl md:text-2xl text-navy-800 leading-relaxed mb-8 italic">
               &ldquo;{testimonial.quote}&rdquo;

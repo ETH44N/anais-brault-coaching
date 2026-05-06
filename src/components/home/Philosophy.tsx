@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
 import { useRef } from 'react'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 
@@ -23,15 +24,14 @@ export default function Philosophy() {
                 className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-gradient-to-br from-sage-100 to-brand-100"
                 style={{ y: imageY }}
               >
-                {/* Placeholder for professional photo */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center px-8">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-brand-300 to-sage-300 flex items-center justify-center">
-                      <span className="font-display text-4xl text-white">AB</span>
-                    </div>
-                    <p className="text-navy-400 text-sm italic">Photo professionnelle d&apos;Anaïs</p>
-                  </div>
-                </div>
+                <Image
+                  src="/anais-portrait.jpg"
+                  alt="Anaïs Brault, coach psycho-somatique"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
               </motion.div>
               {/* Floating card */}
               <motion.div

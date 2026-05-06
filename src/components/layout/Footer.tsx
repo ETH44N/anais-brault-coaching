@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Instagram, Mail, ArrowUpRight } from 'lucide-react'
@@ -45,9 +46,13 @@ export default function Footer() {
           {/* Brand */}
           <ScrollReveal delay={0.1}>
             <div>
-              <span className="font-display text-2xl font-semibold">
-                Anaïs<span className="text-brand-400"> Brault</span>
-              </span>
+              <Image
+                src="/logo-white.png"
+                alt="Anaïs Brault"
+                width={200}
+                height={56}
+                className="h-12 w-auto"
+              />
               <p className="text-navy-300 mt-4 leading-relaxed max-w-sm">
                 Coach psycho-somatique certifiée. Accompagnement transformateur pour entrepreneurs en quête d&apos;alignement intérieur.
               </p>

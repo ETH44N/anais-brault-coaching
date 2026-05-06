@@ -37,6 +37,10 @@ export const metadata: Metadata = {
     description: 'Coaching somatique transformateur pour entrepreneurs.',
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export default function RootLayout({

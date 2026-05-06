@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
 import { useRef } from 'react'
 import Link from 'next/link'
 import { ArrowRight, MapPin, GraduationCap, Heart, Star } from 'lucide-react'
@@ -104,6 +105,31 @@ export default function AboutContent() {
         </div>
       </section>
 
+      {/* Intro video */}
+      <section className="section-padding bg-white">
+        <div className="max-w-4xl mx-auto">
+          <ScrollReveal className="text-center mb-10">
+            <span className="text-sm font-semibold tracking-widest uppercase text-brand-500 mb-4 block">
+              En vidéo
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl text-navy-900 mb-4">
+              Découvre Anaïs en quelques minutes
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <div className="relative rounded-3xl overflow-hidden shadow-xl border border-brand-100/50 aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/2oyoE9gEsK8"
+                title="Découvre Anaïs Brault"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* Story / Timeline */}
       <section className="section-padding bg-white">
         <div className="max-w-4xl mx-auto">
@@ -168,19 +194,17 @@ export default function AboutContent() {
       <section className="section-padding bg-gradient-to-b from-white to-brand-50">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Photo placeholder */}
+            {/* Portrait */}
             <ScrollReveal direction="left">
               <div className="relative">
-                <div className="aspect-[3/4] rounded-3xl bg-gradient-to-br from-sage-100 via-brand-100 to-cream-200 overflow-hidden">
-                  <div className="absolute inset-0 flex items-end justify-center pb-12">
-                    <div className="text-center">
-                      <div className="w-40 h-40 mx-auto mb-4 rounded-full bg-gradient-to-br from-brand-300/50 to-sage-300/50 backdrop-blur-sm flex items-center justify-center border-4 border-white/50">
-                        <span className="font-display text-5xl text-white">AB</span>
-                      </div>
-                      <p className="text-navy-400 text-sm">Anaïs Brault</p>
-                      <p className="text-navy-300 text-xs">Coach Psycho-Somatique</p>
-                    </div>
-                  </div>
+                <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-gradient-to-br from-sage-100 via-brand-100 to-cream-200">
+                  <Image
+                    src="/anais-portrait.jpg"
+                    alt="Anaïs Brault, coach psycho-somatique"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
                 <div className="absolute -bottom-4 -left-4 w-full h-full rounded-3xl border-2 border-brand-200/30 -z-10" />
               </div>
