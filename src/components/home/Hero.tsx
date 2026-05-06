@@ -103,17 +103,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex items-center justify-center"
         >
           <MagneticButton>
-            <Link href="/contact" className="btn-primary group">
-              Commencer ma transformation
+            <Link href="#contact" className="btn-primary group">
+              Réserver mon appel
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </MagneticButton>
-          <MagneticButton>
-            <Link href="/services" className="btn-secondary">
-              Découvrir l&apos;accompagnement
             </Link>
           </MagneticButton>
         </motion.div>

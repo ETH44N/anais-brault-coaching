@@ -6,19 +6,9 @@ import { motion } from 'framer-motion'
 import { Instagram, Mail, ArrowUpRight } from 'lucide-react'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 
-const footerLinks = [
-  { href: '/', label: 'Accueil' },
-  { href: '/a-propos', label: 'À Propos' },
-  { href: '/services', label: 'Services' },
-  { href: '/temoignages', label: 'Témoignages' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contact', label: 'Contact' },
-]
-
 export default function Footer() {
   return (
     <footer className="relative bg-navy-900 text-white overflow-hidden">
-      {/* Decorative gradient orb */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-400/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
 
       {/* CTA Banner */}
@@ -30,20 +20,18 @@ export default function Footer() {
               <span className="text-brand-400"> ?</span>
             </h2>
             <p className="text-navy-200 max-w-xl mx-auto mb-8 text-lg">
-              Remplis le formulaire et explore comment le coaching somatique peut débloquer ton potentiel.
+              Réserve ton appel découverte et explore comment le coaching somatique peut débloquer ton potentiel.
             </p>
-            <Link href="/contact" className="btn-gold">
-              Remplir le formulaire
+            <Link href="/#contact" className="btn-gold">
+              Réserver mon appel
               <ArrowUpRight className="ml-2 w-4 h-4" />
             </Link>
           </div>
         </ScrollReveal>
       </div>
 
-      {/* Footer Content */}
       <div className="section-padding">
-        <div className="grid md:grid-cols-3 gap-12 md:gap-8">
-          {/* Brand */}
+        <div className="grid md:grid-cols-2 gap-12 md:gap-8">
           <ScrollReveal delay={0.1}>
             <div>
               <Image
@@ -81,27 +69,7 @@ export default function Footer() {
             </div>
           </ScrollReveal>
 
-          {/* Navigation */}
           <ScrollReveal delay={0.2}>
-            <div>
-              <h3 className="font-display text-lg font-semibold mb-6">Navigation</h3>
-              <ul className="space-y-3">
-                {footerLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-navy-300 hover:text-brand-400 transition-colors text-sm"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </ScrollReveal>
-
-          {/* Contact */}
-          <ScrollReveal delay={0.3}>
             <div>
               <h3 className="font-display text-lg font-semibold mb-6">Contact</h3>
               <ul className="space-y-3 text-sm text-navy-300">
@@ -135,14 +103,11 @@ export default function Footer() {
           </ScrollReveal>
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-navy-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-navy-500 text-xs">
             © {new Date().getFullYear()} Anaïs Brault. Tous droits réservés.
           </p>
-          <p className="text-navy-600 text-xs">
-            Coaching somatique pour entrepreneurs
-          </p>
+          <p className="text-navy-600 text-xs">Coaching somatique pour entrepreneurs</p>
         </div>
       </div>
     </footer>
