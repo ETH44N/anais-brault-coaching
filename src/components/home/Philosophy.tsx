@@ -40,9 +40,10 @@ export default function Philosophy() {
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <p className="text-navy-500 text-lg leading-relaxed mb-8">
-                Aujourd&apos;hui, certifiée par <strong className="text-navy-700">The Institute for Coaching Mastery</strong> sous 
-                la direction d&apos;Alyssa Nobriga, je suis l&apos;une des rares coaches somatiques en France. 
-                Mon approche intègre les enseignements de <em>Gabor Maté</em>, <em>Byron Katie</em> et <em>Teal Swan</em> pour 
+                Aujourd&apos;hui, certifiée par <a href="https://www.alyssanobriga.com/applynow/" target="_blank" rel="noopener noreferrer" className="text-navy-700 font-semibold hover:text-brand-500 transition-colors underline underline-offset-2">The Institute for Coaching Mastery</a> sous
+                la direction d&apos;Alyssa Nobriga, je suis l&apos;une des rares coaches somatiques en France.
+                Je me forme également en psychologie spirituelle auprès de l&apos;<a href="https://www.universityofsantamonica.edu/" target="_blank" rel="noopener noreferrer" className="text-navy-700 font-semibold hover:text-brand-500 transition-colors underline underline-offset-2">University of Santa Monica</a>.
+                Mon approche intègre les enseignements de <em>Gabor Maté</em>, <em>Byron Katie</em> et <em>Teal Swan</em> pour
                 une transformation qui touche chaque niveau de ton être.
               </p>
             </ScrollReveal>
@@ -83,14 +84,25 @@ export default function Philosophy() {
                 />
               </motion.div>
               <motion.div
-                className="absolute -bottom-6 -right-6 md:right-6 bg-white rounded-2xl p-6 shadow-xl border border-brand-100 max-w-[240px]"
+                className="absolute -bottom-6 -right-6 md:right-6 bg-white rounded-2xl p-5 shadow-xl border border-brand-100 max-w-[280px]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
               >
-                <p className="font-display text-3xl font-bold text-gradient mb-1">10+</p>
-                <p className="text-navy-500 text-sm">pays parcourus en auto-stop, une quête de sens devenue une méthode</p>
+                <div className="divide-y divide-navy-100">
+                  {[
+                    { value: '3 ans', label: 'formée en philosophie' },
+                    { value: '2 ans', label: 'formée en coaching auprès d\'Alyssa Nobriga' },
+                    { value: 'Master', label: 'en psychologie spirituelle à l\'Université de Santa Monica' },
+                    { value: '10+', label: 'pays parcourus en auto-stop, une quête de sens devenue une méthode' },
+                  ].map(({ value, label }) => (
+                    <div key={value} className="py-3 flex items-start gap-3">
+                      <span className="font-display text-xl font-bold text-gradient w-20 flex-shrink-0">{value}</span>
+                      <span className="text-navy-500 text-xs leading-snug">{label}</span>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             </div>
           </ScrollReveal>
