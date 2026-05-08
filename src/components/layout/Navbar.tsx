@@ -31,14 +31,7 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         <Link href="/" className="relative z-50" aria-label="Anaïs Brault — Accueil">
           <motion.div whileHover={{ scale: 1.02 }} className="flex items-center">
-            <Image
-              src="/logo-blue.png"
-              alt="Anaïs Brault"
-              width={200}
-              height={56}
-              className="h-10 w-auto md:h-12"
-              priority
-            />
+            <span className="font-display text-lg text-navy-900 tracking-wide">Anaïs Brault</span>
           </motion.div>
         </Link>
 

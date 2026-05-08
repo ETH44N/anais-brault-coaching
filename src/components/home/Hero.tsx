@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import MagneticButton from '@/components/ui/MagneticButton'
 
@@ -32,6 +33,18 @@ export default function Hero() {
 
       {/* Decorative grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(20,24,41,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(20,24,41,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+
+      {/* Logo watermark */}
+      <div className="absolute inset-0 flex items-start justify-center pt-16 pointer-events-none select-none">
+        <Image
+          src="/logo-blue.png"
+          alt=""
+          width={700}
+          height={200}
+          className="w-[80vw] max-w-2xl opacity-[0.06] object-contain"
+          priority
+        />
+      </div>
 
       <motion.div
         className="relative z-10 max-w-5xl mx-auto px-6 text-center"
