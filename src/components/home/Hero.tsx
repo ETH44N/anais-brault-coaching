@@ -106,13 +106,24 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex items-center justify-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <MagneticButton>
             <Link href="#contact" className="btn-primary group">
               Candidater pour un 1:1
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
+          </MagneticButton>
+          <MagneticButton>
+            <a
+              href="https://docs.google.com/forms/d/1NS08f3nbR6YDk1Bug1cfKFvjrrTze8kQyOWWTowaAAE/edit#responses"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold group"
+            >
+              Se former au coaching somatique
+              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </a>
           </MagneticButton>
         </motion.div>
 
