@@ -48,7 +48,7 @@ export default function Philosophy() {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.4}>
-              <div className="flex flex-col sm:flex-row gap-8">
+              <div className="flex flex-wrap gap-6 sm:gap-8">
                 <div>
                   <p className="font-display text-3xl font-bold text-gradient">ICM</p>
                   <p className="text-navy-400 text-sm mt-1">Certification</p>
@@ -63,6 +63,19 @@ export default function Philosophy() {
                   <p className="font-display text-3xl font-bold text-gradient">100%</p>
                   <p className="text-navy-400 text-sm mt-1">Holistique</p>
                 </div>
+              </div>
+              <div className="mt-8 divide-y divide-navy-100 border-t border-navy-100">
+                {[
+                  { value: '3 ans', label: 'formée en philosophie' },
+                  { value: '2 ans', label: "formée en coaching auprès d'Alyssa Nobriga" },
+                  { value: 'Master', label: "en psychologie spirituelle à l'Université de Santa Monica" },
+                  { value: '10+', label: 'pays parcourus en auto-stop, une quête de sens devenue une méthode' },
+                ].map(({ value, label }) => (
+                  <div key={value} className="py-2.5 flex items-start gap-4">
+                    <span className="font-display text-base font-bold text-gradient w-16 flex-shrink-0">{value}</span>
+                    <span className="text-navy-400 text-xs leading-snug">{label}</span>
+                  </div>
+                ))}
               </div>
             </ScrollReveal>
           </div>
