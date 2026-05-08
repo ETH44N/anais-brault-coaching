@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 
 const MAX_NAME = 200
 const MAX_EMAIL = 320
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Email invalide.' }, { status: 400 })
   }
 
-  const { error: dbError } = await supabase
+  const { error: dbError } = await getSupabase()
     .from('anais_form_submissions')
     .insert({
       name,

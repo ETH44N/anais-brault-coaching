@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase-admin'
+import { getSupabaseAdmin } from '@/lib/supabase-admin'
 
 const VALID_STATUSES = ['new', 'contacted', 'archived'] as const
 
@@ -32,7 +32,7 @@ export async function PATCH(
     return NextResponse.json({ error: 'Statut invalide.' }, { status: 400 })
   }
 
-  const { error } = await supabaseAdmin
+  const { error } = await getSupabaseAdmin()
     .from('anais_form_submissions')
     .update({ status })
     .eq('id', params.id)
@@ -69,7 +69,7 @@ export async function DELETE(
     return NextResponse.json({ error: 'Code invalide.' }, { status: 401 })
   }
 
-  const { error } = await supabaseAdmin
+  const { error } = await getSupabaseAdmin()
     .from('anais_form_submissions')
     .delete()
     .eq('id', params.id)

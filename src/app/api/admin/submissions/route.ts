@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase-admin'
+import { getSupabaseAdmin } from '@/lib/supabase-admin'
 
 export async function POST(request: Request) {
   const adminPassword = process.env.ADMIN_PASSWORD
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Code invalide.' }, { status: 401 })
   }
 
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from('anais_form_submissions')
     .select('id, created_at, name, email, ideal_life, current_situation, status')
     .order('created_at', { ascending: false })
