@@ -43,7 +43,7 @@ export default function Navbar() {
         </Link>
 
         <Link href="/#contact" className="btn-primary text-xs sm:text-sm px-5 sm:px-6 py-2.5 group">
-          Candidater
+          Postuler
           <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </nav>
