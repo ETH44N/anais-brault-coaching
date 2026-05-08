@@ -42,8 +42,9 @@ export default function Navbar() {
           </motion.div>
         </Link>
 
-        <Link href="/#contact" className="btn-primary text-xs sm:text-sm px-5 sm:px-6 py-2.5 group">
-          Candidater pour un 1:1
+        <Link href="/#contact" className="btn-primary text-xs sm:text-sm px-4 sm:px-6 py-2.5 group">
+          <span className="hidden sm:inline">Candidater pour un 1:1</span>
+          <span className="sm:hidden">Candidater</span>
           <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </nav>
