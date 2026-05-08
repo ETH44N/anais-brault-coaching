@@ -81,27 +81,6 @@ export default function Philosophy() {
                   priority
                 />
               </motion.div>
-              <motion.div
-                className="hidden md:block absolute -bottom-6 right-6 bg-white rounded-2xl p-5 shadow-xl border border-brand-100 max-w-[280px]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
-                <div className="divide-y divide-navy-100">
-                  {[
-                    { value: '3 ans', label: 'formée en philosophie' },
-                    { value: '2 ans', label: 'formée en coaching auprès d\'Alyssa Nobriga' },
-                    { value: 'Master', label: 'en psychologie spirituelle à l\'Université de Santa Monica' },
-                    { value: '10+', label: 'pays parcourus en auto-stop, une quête de sens devenue une méthode' },
-                  ].map(({ value, label }) => (
-                    <div key={value} className="py-3 flex items-start gap-3">
-                      <span className="font-display text-xl font-bold text-gradient w-20 flex-shrink-0">{value}</span>
-                      <span className="text-navy-500 text-xs leading-snug">{label}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
             </div>
           </ScrollReveal>
         </div>
