@@ -48,23 +48,8 @@ export default function Philosophy() {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.4}>
-              <div className="flex flex-wrap gap-6 sm:gap-8">
-                <div>
-                  <p className="font-display text-3xl font-bold text-gradient">ICM</p>
-                  <p className="text-navy-400 text-sm mt-1">Certification</p>
-                </div>
-                <div className="w-px bg-navy-100 hidden sm:block" />
-                <div>
-                  <p className="font-display text-3xl font-bold text-gradient">5</p>
-                  <p className="text-navy-400 text-sm mt-1">Niveaux d&apos;intervention</p>
-                </div>
-                <div className="w-px bg-navy-100 hidden sm:block" />
-                <div>
-                  <p className="font-display text-3xl font-bold text-gradient">100%</p>
-                  <p className="text-navy-400 text-sm mt-1">Holistique</p>
-                </div>
-              </div>
-              <div className="mt-8 divide-y divide-navy-100 border-t border-navy-100">
+              <p className="font-display text-xl text-navy-900 mb-4">Anaïs Brault, coach psycho-somatique</p>
+              <div className="divide-y divide-navy-100 border-t border-navy-100">
                 {[
                   { value: '3 ans', label: 'formée en philosophie' },
                   { value: '2 ans', label: "formée en coaching auprès d'Alyssa Nobriga" },
