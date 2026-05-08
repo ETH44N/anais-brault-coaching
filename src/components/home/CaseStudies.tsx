@@ -23,11 +23,11 @@ const oneToOneVideos: CarouselVideo[] = [
     metric: '100 000 € en une semaine',
   },
   {
-    id: 'n9Ww-aPvXRc',
-    name: 'Anaëlle',
+    id: 'LPNNF4DOKeA',
+    name: 'Kanna AKA',
     role: 'Entrepreneure',
-    quote: 'Mon chiffre d\'affaires est passé de zéro à 5 000 € par mois. Au-delà des chiffres, c\'est ma relation à moi-même qui a fondamentalement changé.',
-    metric: 'De 0 à 5 000 € / mois',
+    quote: 'J\'avais une peur paralysante de parler en public. Anaïs m\'a aidée à libérer ce qui était stocké dans mon corps, et aujourd\'hui je prends la parole avec confiance et plaisir.',
+    metric: 'Peur de parler en public dépassée',
   },
   {
     id: 'yoUGL-4iAJI',
@@ -44,11 +44,11 @@ const oneToOneVideos: CarouselVideo[] = [
     metric: 'Résultats concrets, mesurables',
   },
   {
-    id: 'LPNNF4DOKeA',
-    name: 'Kanna AKA',
+    id: 'n9Ww-aPvXRc',
+    name: 'Anaëlle',
     role: 'Entrepreneure',
-    quote: 'J\'avais une peur paralysante de parler en public. Anaïs m\'a aidée à libérer ce qui était stocké dans mon corps, et aujourd\'hui je prends la parole avec confiance et plaisir.',
-    metric: 'Peur de parler en public dépassée',
+    quote: 'Mon chiffre d\'affaires est passé de zéro à 5 000 € par mois. Au-delà des chiffres, c\'est ma relation à moi-même qui a fondamentalement changé.',
+    metric: 'De 0 à 5 000 € / mois',
   },
 ]
 
@@ -70,8 +70,8 @@ const workshopVideos: CarouselVideo[] = [
   },
   {
     id: 'jO0E6WWuJiM',
-    name: 'Kanna AKA',
-    role: 'Entrepreneure',
+    name: 'Victor',
+    role: 'Entrepreneur',
     quote: '',
     metric: '',
   },
