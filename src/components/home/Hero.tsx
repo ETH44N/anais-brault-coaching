@@ -107,7 +107,7 @@ export default function Hero() {
         >
           <MagneticButton>
             <Link href="#contact" className="btn-primary group">
-              Postuler
+              Candidater
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </MagneticButton>

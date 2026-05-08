@@ -23,7 +23,7 @@ export default function Footer() {
               Une place se libère ? Postule et Anaïs t&apos;écrit personnellement.
             </p>
             <Link href="/#contact" className="btn-gold">
-              Postuler
+              Candidater
               <ArrowUpRight className="ml-2 w-4 h-4" />
             </Link>
           </div>
