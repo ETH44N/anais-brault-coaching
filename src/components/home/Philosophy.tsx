@@ -84,7 +84,7 @@ export default function Philosophy() {
                 />
               </motion.div>
               <motion.div
-                className="absolute -bottom-8 right-4 md:-bottom-6 md:right-6 bg-white rounded-2xl p-5 shadow-xl border border-brand-100 max-w-[280px]"
+                className="hidden md:block absolute -bottom-6 right-6 bg-white rounded-2xl p-5 shadow-xl border border-brand-100 max-w-[280px]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
