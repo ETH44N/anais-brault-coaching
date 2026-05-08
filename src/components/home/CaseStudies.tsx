@@ -104,9 +104,6 @@ function Carousel({ videos, title }: { videos: CarouselVideo[]; title: string })
     <ScrollReveal>
       <div className="max-w-3xl mx-auto">
         <div className="mb-10">
-          <span className="text-[11px] font-medium tracking-[0.3em] uppercase text-navy-400 mb-4 block">
-            Témoignages
-          </span>
           <h2 className="font-display text-2xl md:text-3xl text-navy-900 leading-[1.2]">
             {title}
           </h2>
@@ -190,13 +187,8 @@ export default function CaseStudies() {
     <section className="section-padding pt-8 md:pt-10 bg-white">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal className="mb-6">
-          <span className="text-[11px] font-medium tracking-[0.3em] uppercase text-navy-400 mb-6 block">
-            Cas clients
-          </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] text-navy-900 leading-[1.15] max-w-3xl">
-            Des entrepreneurs qui ont osé
-            <br />
-            <em className="not-italic text-brand-500">aller au-delà du mental</em>.
+            Témoignages
           </h2>
         </ScrollReveal>
 
