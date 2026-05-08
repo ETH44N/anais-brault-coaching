@@ -30,7 +30,7 @@ export default function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, socialLink, idealLife, goal, currentSituation, obstacle, revenue, meditationScale }),
+        body: JSON.stringify({ name, email, socialLink, idealLife, currentSituation, obstacle, revenue, meditationScale }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Une erreur est survenue.')
@@ -122,20 +122,12 @@ export default function ContactForm() {
               />
 
               <TextareaField
-                label="Décris-moi ta vie idéale"
+                label="Décris-moi ta vie idéale et l'objectif que tu aimerais atteindre"
                 hint="Si tu avais une baguette magique, qu'est-ce que tu changerais dans ta vie ?"
                 required
                 value={idealLife}
                 onChange={setIdealLife}
                 rows={5}
-              />
-
-              <TextareaField
-                label="Quel est l'objectif que tu aimerais atteindre ?"
-                required
-                value={goal}
-                onChange={setGoal}
-                rows={4}
               />
 
               <TextareaField
