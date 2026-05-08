@@ -31,7 +31,7 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         <div />
 
-        <Link href="/#contact" className="btn-primary text-xs sm:text-sm px-4 sm:px-6 py-2.5 group">
+        <Link href="/#contact" className={cn('btn-primary text-xs sm:text-sm px-4 sm:px-6 py-2.5 group transition-all duration-300 sm:opacity-100', isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none sm:opacity-100 sm:pointer-events-auto')}>
           <span className="hidden sm:inline">Candidater pour un 1:1</span>
           <span className="sm:hidden">Candidater</span>
           <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
