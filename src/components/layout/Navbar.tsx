@@ -29,11 +29,7 @@ export default function Navbar() {
       )}
     >
       <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link href="/" className="relative z-50" aria-label="Anaïs Brault — Accueil">
-          <motion.div whileHover={{ scale: 1.02 }} className="flex items-center">
-            <span className="font-display text-lg text-navy-900 tracking-wide">Anaïs Brault</span>
-          </motion.div>
-        </Link>
+        <div />
 
         <Link href="/#contact" className="btn-primary text-xs sm:text-sm px-4 sm:px-6 py-2.5 group">
           <span className="hidden sm:inline">Candidater pour un 1:1</span>
