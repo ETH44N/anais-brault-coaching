@@ -119,9 +119,10 @@ export default function Hero() {
               href="https://docs.google.com/forms/d/1NS08f3nbR6YDk1Bug1cfKFvjrrTze8kQyOWWTowaAAE/edit#responses"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-gold group"
+              className="btn-gold group text-sm"
             >
-              Se former au coaching somatique
+              <span className="hidden sm:inline">Se former au coaching somatique</span>
+              <span className="sm:hidden">Se former</span>
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </a>
           </MagneticButton>
