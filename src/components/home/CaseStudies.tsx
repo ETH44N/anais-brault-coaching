@@ -189,12 +189,6 @@ export default function CaseStudies() {
   return (
     <section className="section-padding pt-8 md:pt-10 bg-white">
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal className="mb-6">
-          <span className="text-sm font-semibold tracking-widest uppercase text-brand-500 block">
-            Témoignages
-          </span>
-        </ScrollReveal>
-
         <div className="space-y-24 md:space-y-32">
           <Carousel videos={oneToOneVideos} title="Ils ont travaillé avec moi en 1:1" />
           <Carousel videos={workshopVideos} title="Workshops et retraites" />
