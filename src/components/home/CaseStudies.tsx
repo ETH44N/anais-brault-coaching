@@ -187,9 +187,9 @@ export default function CaseStudies() {
     <section className="section-padding pt-8 md:pt-10 bg-white">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal className="mb-6">
-          <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] text-navy-900 leading-[1.15] max-w-3xl">
+          <span className="text-sm font-semibold tracking-widest uppercase text-brand-500 block">
             Témoignages
-          </h2>
+          </span>
         </ScrollReveal>
 
         <div className="space-y-24 md:space-y-32">
