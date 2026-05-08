@@ -8,18 +8,6 @@ const certs = [
     src: '/certifications/cmmc-badge-navy.png',
     label: 'Certified Mastery in Coaching',
   },
-  {
-    src: '/certifications/cmmc-tile-navy.png',
-    label: 'CMMC Method',
-  },
-  {
-    src: '/certifications/icm-social-media-badge.png',
-    label: 'ICM Certified',
-  },
-  {
-    src: '/certifications/certificate-2024.jpg',
-    label: 'Certification 2024',
-  },
 ]
 
 export default function Certifications() {
@@ -35,22 +23,21 @@ export default function Certifications() {
             <span className="text-gradient"> reconnue</span>
           </h2>
           <p className="text-navy-500 max-w-xl mx-auto">
-            Certifiée par The Institute for Coaching Mastery sous la direction d&apos;Alyssa
-            Nobriga, l&apos;une des rares coaches somatiques certifiées en France.
+            Certifiée par The Institute for Coaching Mastery sous la direction d&apos;Alyssa Nobriga.
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="flex justify-center">
           {certs.map((c) => (
             <ScrollReveal key={c.src}>
-              <div className="bg-white rounded-2xl p-6 border border-brand-100/50 shadow-sm flex flex-col items-center justify-center aspect-square">
+              <div className="bg-white rounded-2xl p-6 border border-brand-100/50 shadow-sm flex flex-col items-center justify-center aspect-square w-48">
                 <div className="relative w-full flex-1 mb-3">
                   <Image
                     src={c.src}
                     alt={c.label}
                     fill
                     className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 25vw"
+                    sizes="192px"
                   />
                 </div>
                 <p className="text-xs text-navy-500 text-center font-medium">{c.label}</p>

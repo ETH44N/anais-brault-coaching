@@ -13,17 +13,17 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Social proof first — case studies before any presentation */}
+      {/* Anaïs's video presentation first */}
+      <IntroVideo />
+
+      {/* Social proof — case studies */}
       <CaseStudies />
 
       {/* The work: methodology */}
       <CoachingLevels />
-
-      {/* Anaïs's presentation — at the end, leading into the form */}
-      <IntroVideo />
       <Philosophy />
-      <MentorSection />
-      <PhotoGallery />
+
+
       <Certifications />
 
       <ContactForm />

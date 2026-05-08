@@ -3,32 +3,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Instagram, Mail, ArrowUpRight } from 'lucide-react'
+import { Instagram, Mail, Youtube, ArrowUpRight } from 'lucide-react'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 
 export default function Footer() {
   return (
     <footer className="relative bg-navy-900 text-white overflow-hidden">
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-400/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-
-      {/* CTA Banner */}
-      <div className="section-padding pb-0">
-        <ScrollReveal>
-          <div className="relative rounded-3xl bg-gradient-to-br from-brand-400/10 to-brand-500/5 border border-brand-400/20 p-12 md:p-16 text-center">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl mb-4">
-              Prête à transformer ta vie
-              <span className="text-brand-400"> ?</span>
-            </h2>
-            <p className="text-navy-200 max-w-xl mx-auto mb-8 text-lg">
-              Une place se libère ? Postule et Anaïs t&apos;écrit personnellement.
-            </p>
-            <Link href="/#contact" className="btn-gold">
-              Postuler
-              <ArrowUpRight className="ml-2 w-4 h-4" />
-            </Link>
-          </div>
-        </ScrollReveal>
-      </div>
 
       <div className="section-padding">
         <div className="grid md:grid-cols-2 gap-12 md:gap-8">
@@ -64,6 +45,17 @@ export default function Footer() {
                   aria-label="Email"
                 >
                   <Mail className="w-4 h-4" />
+                </motion.a>
+                <motion.a
+                  href="https://www.youtube.com/@Ana%C3%AFsBrault"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-navy-700 flex items-center justify-center text-navy-300 hover:text-brand-400 hover:border-brand-400 transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="YouTube"
+                >
+                  <Youtube className="w-4 h-4" />
                 </motion.a>
               </div>
             </div>

@@ -17,38 +17,8 @@ export default function Philosophy() {
     <section ref={sectionRef} className="section-padding relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image Column */}
-          <ScrollReveal direction="left">
-            <div className="relative">
-              <motion.div
-                className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-gradient-to-br from-sage-100 to-brand-100"
-                style={{ y: imageY }}
-              >
-                <Image
-                  src="/anais-portrait.jpg"
-                  alt="Anaïs Brault, coach psycho-somatique"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority
-                />
-              </motion.div>
-              {/* Floating card */}
-              <motion.div
-                className="absolute -bottom-6 -right-6 md:right-6 bg-white rounded-2xl p-6 shadow-xl border border-brand-100 max-w-[240px]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
-                <p className="font-display text-3xl font-bold text-gradient mb-1">10+</p>
-                <p className="text-navy-500 text-sm">pays parcourus en auto-stop, une quête de sens devenue une méthode</p>
-              </motion.div>
-            </div>
-          </ScrollReveal>
-
-          {/* Text Column */}
-          <div>
+          {/* Text Column — first in DOM so title appears above image on mobile */}
+          <div className="order-1 lg:order-2">
             <ScrollReveal>
               <span className="text-sm font-semibold tracking-widest uppercase text-brand-500 mb-4 block">
                 Philosophie
@@ -95,6 +65,35 @@ export default function Philosophy() {
               </div>
             </ScrollReveal>
           </div>
+
+          {/* Image Column */}
+          <ScrollReveal direction="left" className="order-2 lg:order-1">
+            <div className="relative">
+              <motion.div
+                className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-gradient-to-br from-sage-100 to-brand-100"
+                style={{ y: imageY }}
+              >
+                <Image
+                  src="/anais-portrait.jpg"
+                  alt="Anaïs Brault, coach psycho-somatique"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              </motion.div>
+              <motion.div
+                className="absolute -bottom-6 -right-6 md:right-6 bg-white rounded-2xl p-6 shadow-xl border border-brand-100 max-w-[240px]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+              >
+                <p className="font-display text-3xl font-bold text-gradient mb-1">10+</p>
+                <p className="text-navy-500 text-sm">pays parcourus en auto-stop, une quête de sens devenue une méthode</p>
+              </motion.div>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

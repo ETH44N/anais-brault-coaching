@@ -11,7 +11,13 @@ export default function ContactForm() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [idealLife, setIdealLife] = useState('')
+  const [goal, setGoal] = useState('')
   const [currentSituation, setCurrentSituation] = useState('')
+  const [socialLink, setSocialLink] = useState('')
+  const [obstacle, setObstacle] = useState('')
+  const [whyNotYet, setWhyNotYet] = useState('')
+  const [revenue, setRevenue] = useState('')
+  const [meditationScale, setMeditationScale] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -24,7 +30,7 @@ export default function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, idealLife, currentSituation }),
+        body: JSON.stringify({ name, email, socialLink, idealLife, goal, currentSituation, obstacle, revenue, meditationScale }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Une erreur est survenue.')
@@ -51,11 +57,11 @@ export default function ContactForm() {
               Candidature
             </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl mb-6">
-              Postule à un
-              <span className="text-brand-400"> accompagnement</span>
+              Candidater pour
+              <span className="text-brand-400"> un 1:1</span>
             </h2>
             <p className="text-navy-300 max-w-xl mx-auto text-lg">
-              Anaïs accueille un nombre limité de personnes. Réponds à ces deux questions
+              Anaïs accueille un nombre limité de personnes. Réponds à ces questions
               pour qu&apos;elle évalue si l&apos;accompagnement est juste pour toi.
             </p>
           </div>
@@ -76,8 +82,7 @@ export default function ContactForm() {
                 Merci{name ? `, ${name}` : ''} !
               </h3>
               <p className="text-navy-300 max-w-md mx-auto">
-                Ta candidature a bien été reçue. Anaïs lit personnellement chaque réponse
-                et t&apos;écrira par email dès qu&apos;elle aura le temps de te lire avec attention.
+                Ta candidature a bien été reçue. Tu es maintenant en liste d&apos;attente — Anaïs lit personnellement chaque réponse et te recontactera dès que possible. Merci pour ta patience.
               </p>
             </motion.div>
           ) : (
@@ -98,15 +103,23 @@ export default function ContactForm() {
                   placeholder="Ton prénom"
                 />
                 <Field
-                  label="Email"
+                  label="Ton WhatsApp"
                   required
-                  type="email"
+                  type="tel"
                   value={email}
                   onChange={setEmail}
                   maxLength={320}
-                  placeholder="ton@email.com"
+                  placeholder="+33 6 00 00 00 00"
                 />
               </div>
+
+              <Field
+                label="Ton Instagram, LinkedIn ou YouTube"
+                value={socialLink}
+                onChange={setSocialLink}
+                maxLength={500}
+                placeholder="https://..."
+              />
 
               <TextareaField
                 label="Décris-moi ta vie idéale"
@@ -118,6 +131,14 @@ export default function ContactForm() {
               />
 
               <TextareaField
+                label="Quel est l'objectif que tu aimerais atteindre ?"
+                required
+                value={goal}
+                onChange={setGoal}
+                rows={4}
+              />
+
+              <TextareaField
                 label="Où en es-tu maintenant ?"
                 hint="Où est-ce que tu en es dans ta vie par rapport à ces objectifs ?"
                 required
@@ -125,6 +146,48 @@ export default function ContactForm() {
                 onChange={setCurrentSituation}
                 rows={5}
               />
+
+              <TextareaField
+                label="Qu'est-ce qui, te connaissant, pourrait t'en empêcher ? Qu'est-ce qui fait que tu n'as pas encore atteint ces objectifs ?"
+                hint="Ex : procrastination, peur du jugement, manque de discipline, perfectionnisme, doute de soi…"
+                required
+                value={obstacle}
+                onChange={setObstacle}
+                rows={5}
+              />
+
+              <TextareaField
+                label="Quel est le chiffre d'affaires mensuel de ton entreprise ?"
+                required
+                value={revenue}
+                onChange={setRevenue}
+                rows={2}
+              />
+
+              <div>
+                <label className="block">
+                  <span className="text-sm font-medium text-navy-200 mb-2 block">
+                    Sur une échelle de 1 à 10, à quel point es-tu familier·e avec les pratiques de visualisation et de méditation ?
+                    <span className="text-brand-400"> *</span>
+                  </span>
+                  <div className="flex gap-2 flex-wrap mt-3">
+                    {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
+                      <button
+                        key={n}
+                        type="button"
+                        onClick={() => setMeditationScale(String(n))}
+                        className={`w-10 h-10 rounded-xl border text-sm font-medium transition-all ${
+                          meditationScale === String(n)
+                            ? 'bg-brand-400 border-brand-400 text-white'
+                            : 'bg-white/5 border-white/10 text-navy-300 hover:border-brand-400/60'
+                        }`}
+                      >
+                        {n}
+                      </button>
+                    ))}
+                  </div>
+                </label>
+              </div>
 
               {status === 'error' && (
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-red-500/10 border border-red-400/30 text-red-200">
