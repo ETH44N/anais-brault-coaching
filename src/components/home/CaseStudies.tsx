@@ -187,7 +187,7 @@ function Carousel({ videos, title }: { videos: CarouselVideo[]; title: string })
 
 export default function CaseStudies() {
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding pt-8 md:pt-10 bg-white">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal className="mb-6">
           <span className="text-[11px] font-medium tracking-[0.3em] uppercase text-navy-400 mb-6 block">
