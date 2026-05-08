@@ -104,6 +104,9 @@ function Carousel({ videos, title }: { videos: CarouselVideo[]; title: string })
     <ScrollReveal>
       <div className="max-w-3xl mx-auto">
         <div className="mb-10">
+          <span className="text-sm font-semibold tracking-widest uppercase text-brand-500 mb-3 block">
+            Témoignages
+          </span>
           <h2 className="font-display text-2xl md:text-3xl text-navy-900 leading-[1.2]">
             {title}
           </h2>
