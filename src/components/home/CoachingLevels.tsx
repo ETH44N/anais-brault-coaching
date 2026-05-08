@@ -4,9 +4,9 @@ import ScrollReveal from '@/components/ui/ScrollReveal'
 
 const levels = [
   {
-    title: 'Somatique',
+    title: 'Mental',
     description:
-      'Libérer les tensions et traumatismes stockés dans le corps. Le corps ne ment jamais — il détient les clefs de ta transformation.',
+      'Déconstruire les schémas de pensée limitants qui sabotent ton succès et ta sérénité.',
   },
   {
     title: 'Émotionnel',
@@ -14,9 +14,9 @@ const levels = [
       'Accueillir et traverser les émotions refoulées qui te bloquent. Transformer la douleur en puissance créatrice.',
   },
   {
-    title: 'Mental',
+    title: 'Somatique',
     description:
-      'Déconstruire les schémas de pensée limitants qui sabotent ton succès et ta sérénité.',
+      'Libérer les tensions et traumatismes stockés dans le corps. Le corps ne ment jamais — il détient les clefs de ta transformation.',
   },
   {
     title: 'Inconscient',
@@ -26,7 +26,7 @@ const levels = [
   {
     title: 'Comportemental',
     description:
-      'Ancrer de nouveaux comportements alignés avec la personne que tu deviens. Du savoir au faire, du faire à l\'être.',
+      'Ancrer de nouveaux comportements alignés avec la personne que tu deviens.',
   },
 ]
 
@@ -59,7 +59,7 @@ export default function CoachingLevels() {
                 <h3 className="font-display text-2xl md:text-3xl text-navy-900 tracking-tight">
                   {level.title}
                 </h3>
-                <p className="col-span-2 md:col-span-1 text-navy-500 leading-[1.7] text-base md:text-lg">
+                <p className="col-span-2 md:col-span-1 md:col-start-3 text-navy-500 leading-[1.7] text-base md:text-lg">
                   {level.description}
                 </p>
               </div>
