@@ -189,7 +189,7 @@ export default function CaseStudies() {
   return (
     <section className="section-padding bg-white">
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal className="mb-24">
+        <ScrollReveal className="mb-12">
           <span className="text-[11px] font-medium tracking-[0.3em] uppercase text-navy-400 mb-6 block">
             Cas clients
           </span>
