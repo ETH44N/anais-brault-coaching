@@ -32,7 +32,7 @@ const levels = [
 
 export default function CoachingLevels() {
   return (
-    <section className="section-padding bg-white relative">
+    <section className="section-padding pt-8 md:pt-24 bg-white relative">
       <div className="max-w-5xl mx-auto px-2">
         <ScrollReveal className="mb-20">
           <span className="text-[11px] font-medium tracking-[0.3em] uppercase text-navy-400 mb-6 block">
