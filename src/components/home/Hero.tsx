@@ -116,7 +116,7 @@ export default function Hero() {
           </MagneticButton>
           <MagneticButton>
             <a
-              href="https://docs.google.com/forms/d/1NS08f3nbR6YDk1Bug1cfKFvjrrTze8kQyOWWTowaAAE/edit#responses"
+              href="https://docs.google.com/forms/d/e/1FAIpQLScLTyk1L4WLQuSZz0exoL4q28_thZZIUQVEaV6UzneGw67XYQ/viewform?usp=dialog"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gold group text-sm w-full sm:w-auto justify-center"
