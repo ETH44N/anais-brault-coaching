@@ -24,7 +24,7 @@ export async function POST(request: Request) {
 
   const { data, error } = await getSupabaseAdmin()
     .from('anais_form_submissions')
-    .select('id, created_at, name, email, ideal_life, current_situation, status')
+    .select('id, created_at, name, email, whatsapp, social_link, ideal_life, current_situation, obstacle, revenue, meditation_scale, status')
     .order('created_at', { ascending: false })
 
   if (error) {

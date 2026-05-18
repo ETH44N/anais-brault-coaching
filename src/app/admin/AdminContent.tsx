@@ -2,15 +2,20 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Lock, Loader2, Mail, Calendar, Inbox, CheckCircle2, Archive, Trash2, AlertCircle } from 'lucide-react'
+import { Lock, Loader2, MessageCircle, Calendar, Inbox, CheckCircle2, Archive, Trash2, AlertCircle } from 'lucide-react'
 
 type Submission = {
   id: string
   created_at: string
   name: string
-  email: string
+  email: string | null
+  whatsapp: string
+  social_link: string | null
   ideal_life: string
   current_situation: string
+  obstacle: string
+  revenue: string
+  meditation_scale: string
   status: 'new' | 'contacted' | 'archived'
 }
 
@@ -238,7 +243,7 @@ function SubmissionCard({
             </div>
             <div>
               <p className="font-display font-semibold text-navy-900">{s.name}</p>
-              <p className="text-sm text-navy-500">{s.email}</p>
+              <p className="text-sm text-navy-500">{s.whatsapp}</p>
             </div>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
@@ -262,9 +267,44 @@ function SubmissionCard({
             className="overflow-hidden border-t border-brand-100/70"
           >
             <div className="p-6 space-y-5">
+              {s.social_link && (
+                <div>
+                  <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-2">
+                    Réseau social
+                  </h4>
+                  <a
+                    href={s.social_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand-600 hover:text-brand-700 underline break-all"
+                  >
+                    {s.social_link}
+                  </a>
+                </div>
+              )}
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="bg-brand-50/50 rounded-xl p-4">
+                  <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-1">
+                    Chiffre d&apos;affaires
+                  </h4>
+                  <p className="text-navy-700 whitespace-pre-wrap leading-relaxed">
+                    {s.revenue}
+                  </p>
+                </div>
+                <div className="bg-brand-50/50 rounded-xl p-4">
+                  <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-1">
+                    Méditation (1-10)
+                  </h4>
+                  <p className="text-navy-700 font-display text-2xl">
+                    {s.meditation_scale}
+                  </p>
+                </div>
+              </div>
+
               <div>
                 <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-2">
-                  Q1 — Vie idéale
+                  Vie idéale
                 </h4>
                 <p className="text-navy-700 whitespace-pre-wrap leading-relaxed">
                   {s.ideal_life}
@@ -272,20 +312,30 @@ function SubmissionCard({
               </div>
               <div>
                 <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-2">
-                  Q2 — Situation actuelle
+                  Situation actuelle
                 </h4>
                 <p className="text-navy-700 whitespace-pre-wrap leading-relaxed">
                   {s.current_situation}
                 </p>
               </div>
+              <div>
+                <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-500 mb-2">
+                  Obstacles
+                </h4>
+                <p className="text-navy-700 whitespace-pre-wrap leading-relaxed">
+                  {s.obstacle}
+                </p>
+              </div>
 
               <div className="flex flex-wrap gap-2 pt-4 border-t border-brand-100/70">
                 <a
-                  href={`mailto:${s.email}?subject=${encodeURIComponent('Re: Ta candidature')}`}
+                  href={`https://wa.me/${s.whatsapp.replace(/\D/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm bg-navy-900 text-white hover:bg-navy-800 transition-colors"
                 >
-                  <Mail className="w-4 h-4" />
-                  Répondre par email
+                  <MessageCircle className="w-4 h-4" />
+                  Répondre sur WhatsApp
                 </a>
                 {s.status !== 'contacted' && (
                   <button

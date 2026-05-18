@@ -9,13 +9,11 @@ type Status = 'idle' | 'loading' | 'success' | 'error'
 
 export default function ContactForm() {
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [whatsapp, setWhatsapp] = useState('')
   const [idealLife, setIdealLife] = useState('')
-  const [goal, setGoal] = useState('')
   const [currentSituation, setCurrentSituation] = useState('')
   const [socialLink, setSocialLink] = useState('')
   const [obstacle, setObstacle] = useState('')
-  const [whyNotYet, setWhyNotYet] = useState('')
   const [revenue, setRevenue] = useState('')
   const [meditationScale, setMeditationScale] = useState('')
   const [status, setStatus] = useState<Status>('idle')
@@ -30,7 +28,7 @@ export default function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, socialLink, idealLife, currentSituation, obstacle, revenue, meditationScale }),
+        body: JSON.stringify({ name, whatsapp, socialLink, idealLife, currentSituation, obstacle, revenue, meditationScale }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Une erreur est survenue.')
@@ -106,8 +104,8 @@ export default function ContactForm() {
                   label="Ton WhatsApp"
                   required
                   type="tel"
-                  value={email}
-                  onChange={setEmail}
+                  value={whatsapp}
+                  onChange={setWhatsapp}
                   maxLength={320}
                   placeholder="+33 6 00 00 00 00"
                 />
