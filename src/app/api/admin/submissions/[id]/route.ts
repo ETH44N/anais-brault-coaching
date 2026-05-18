@@ -1,9 +1,23 @@
 import { NextResponse } from 'next/server'
 import { getSupabaseAdmin } from '@/lib/supabase-admin'
+import { sendErrorAlert } from '@/lib/alert'
 
 const VALID_STATUSES = ['new', 'contacted', 'archived'] as const
 
 export async function PATCH(
+  request: Request,
+  ctx: { params: { id: string } },
+) {
+  try {
+    return await handlePatch(request, ctx)
+  } catch (e) {
+    console.error('Unexpected /api/admin/submissions/[id] PATCH failure:', e)
+    await sendErrorAlert('/api/admin/submissions/[id] PATCH (uncaught)', e, { id: ctx.params.id })
+    return NextResponse.json({ error: 'Erreur serveur.' }, { status: 500 })
+  }
+}
+
+async function handlePatch(
   request: Request,
   { params }: { params: { id: string } },
 ) {
@@ -39,6 +53,7 @@ export async function PATCH(
 
   if (error) {
     console.error('Supabase update failed:', error)
+    await sendErrorAlert('/api/admin/submissions/[id] PATCH (update)', error, { id: params.id, status })
     return NextResponse.json({ error: 'Erreur de mise à jour.' }, { status: 500 })
   }
 
@@ -46,6 +61,19 @@ export async function PATCH(
 }
 
 export async function DELETE(
+  request: Request,
+  ctx: { params: { id: string } },
+) {
+  try {
+    return await handleDelete(request, ctx)
+  } catch (e) {
+    console.error('Unexpected /api/admin/submissions/[id] DELETE failure:', e)
+    await sendErrorAlert('/api/admin/submissions/[id] DELETE (uncaught)', e, { id: ctx.params.id })
+    return NextResponse.json({ error: 'Erreur serveur.' }, { status: 500 })
+  }
+}
+
+async function handleDelete(
   request: Request,
   { params }: { params: { id: string } },
 ) {
@@ -76,6 +104,7 @@ export async function DELETE(
 
   if (error) {
     console.error('Supabase delete failed:', error)
+    await sendErrorAlert('/api/admin/submissions/[id] DELETE (delete)', error, { id: params.id })
     return NextResponse.json({ error: 'Erreur de suppression.' }, { status: 500 })
   }
 

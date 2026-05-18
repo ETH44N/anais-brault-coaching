@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { getSupabase } from '@/lib/supabase'
+import { sendErrorAlert } from '@/lib/alert'
 
 const MAX_NAME = 200
 const MAX_WHATSAPP = 320
@@ -8,6 +9,16 @@ const MAX_TEXT = 5000
 const MAX_LINK = 500
 
 export async function POST(request: Request) {
+  try {
+    return await handlePost(request)
+  } catch (e) {
+    console.error('Unexpected /api/contact failure:', e)
+    await sendErrorAlert('/api/contact (uncaught)', e)
+    return NextResponse.json({ error: 'Erreur serveur.' }, { status: 500 })
+  }
+}
+
+async function handlePost(request: Request) {
   let body: Record<string, unknown>
   try {
     body = await request.json()
@@ -57,6 +68,11 @@ export async function POST(request: Request) {
 
   if (dbError) {
     console.error('Supabase insert failed:', dbError)
+    await sendErrorAlert('/api/contact (insert)', dbError, {
+      name,
+      whatsapp,
+      hasSocialLink: Boolean(socialLink),
+    })
     return NextResponse.json({ error: 'Erreur d’enregistrement.' }, { status: 500 })
   }
 
@@ -121,6 +137,7 @@ export async function POST(request: Request) {
     } catch (e) {
       // Submission is already in Supabase — email is best-effort.
       console.error('Resend email failed (non-fatal):', e)
+      await sendErrorAlert('/api/contact (resend notification)', e, { name, whatsapp })
     }
   }
 
