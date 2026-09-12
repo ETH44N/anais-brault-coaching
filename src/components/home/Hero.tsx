@@ -114,18 +114,6 @@ export default function Hero() {
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </MagneticButton>
-          <MagneticButton>
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLScLTyk1L4WLQuSZz0exoL4q28_thZZIUQVEaV6UzneGw67XYQ/viewform"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold group text-sm w-full sm:w-auto justify-center"
-            >
-              <span className="hidden sm:inline">Se former au coaching somatique</span>
-              <span className="sm:hidden">Se former</span>
-              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
-          </MagneticButton>
         </motion.div>
 
         {/* Trust indicators */}
