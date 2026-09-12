@@ -25,13 +25,21 @@ export default function ContactForm() {
     setStatus('loading')
     setErrorMsg('')
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://formspree.io/f/mgaejekq', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, whatsapp, socialLink, idealLife, currentSituation, obstacle, revenue, meditationScale }),
+        body: JSON.stringify({
+          Prénom: name,
+          WhatsApp: whatsapp,
+          'Réseaux sociaux': socialLink,
+          'Vie idéale et objectifs': idealLife,
+          'Situation actuelle': currentSituation,
+          'Obstacles': obstacle,
+          "Chiffre d'affaires mensuel": revenue,
+          'Familiarité méditation (1-10)': meditationScale,
+        }),
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Une erreur est survenue.')
+      if (!res.ok) throw new Error('Une erreur est survenue.')
       setStatus('success')
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Une erreur est survenue.'
