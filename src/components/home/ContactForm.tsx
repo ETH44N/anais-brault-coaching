@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { useForm } from '@formspree/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle, Loader2, ArrowRight, AlertCircle } from 'lucide-react'
 import ScrollReveal from '@/components/ui/ScrollReveal'
 
-type Status = 'idle' | 'loading' | 'success' | 'error'
-
 export default function ContactForm() {
+  const [state, handleFormspreeSubmit] = useForm('mgaejekq')
   const [name, setName] = useState('')
   const [whatsapp, setWhatsapp] = useState('')
   const [idealLife, setIdealLife] = useState('')
@@ -16,36 +16,13 @@ export default function ContactForm() {
   const [obstacle, setObstacle] = useState('')
   const [revenue, setRevenue] = useState('')
   const [meditationScale, setMeditationScale] = useState('')
-  const [status, setStatus] = useState<Status>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (status === 'loading') return
-    setStatus('loading')
-    setErrorMsg('')
-    try {
-      const res = await fetch('https://formspree.io/f/mgaejekq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          Prénom: name,
-          WhatsApp: whatsapp,
-          'Réseaux sociaux': socialLink,
-          'Vie idéale et objectifs': idealLife,
-          'Situation actuelle': currentSituation,
-          'Obstacles': obstacle,
-          "Chiffre d'affaires mensuel": revenue,
-          'Familiarité méditation (1-10)': meditationScale,
-        }),
-      })
-      if (!res.ok) throw new Error('Une erreur est survenue.')
-      setStatus('success')
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'Une erreur est survenue.'
-      setErrorMsg(message)
-      setStatus('error')
-    }
+    const form = e.currentTarget
+    const data = new FormData(form)
+    data.set('Familiarité méditation (1-10)', meditationScale)
+    handleFormspreeSubmit(data)
   }
 
   return (
@@ -74,7 +51,7 @@ export default function ContactForm() {
         </ScrollReveal>
 
         <AnimatePresence mode="wait">
-          {status === 'success' ? (
+          {state.succeeded ? (
             <motion.div
               key="success"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -102,6 +79,7 @@ export default function ContactForm() {
               <div className="grid md:grid-cols-2 gap-6">
                 <Field
                   label="Prénom"
+                  name="Prénom"
                   required
                   value={name}
                   onChange={setName}
@@ -110,6 +88,7 @@ export default function ContactForm() {
                 />
                 <Field
                   label="Ton WhatsApp"
+                  name="WhatsApp"
                   required
                   type="tel"
                   value={whatsapp}
@@ -121,6 +100,7 @@ export default function ContactForm() {
 
               <Field
                 label="Ton Instagram, LinkedIn ou YouTube"
+                name="Réseaux sociaux"
                 value={socialLink}
                 onChange={setSocialLink}
                 maxLength={500}
@@ -129,6 +109,7 @@ export default function ContactForm() {
 
               <TextareaField
                 label="Décris-moi ta vie idéale et l'objectif que tu aimerais atteindre"
+                name="Vie idéale et objectifs"
                 hint="Si tu avais une baguette magique, qu'est-ce que tu changerais dans ta vie ?"
                 required
                 value={idealLife}
@@ -138,6 +119,7 @@ export default function ContactForm() {
 
               <TextareaField
                 label="Où en es-tu maintenant ?"
+                name="Situation actuelle"
                 hint="Où est-ce que tu en es dans ta vie par rapport à ces objectifs ?"
                 required
                 value={currentSituation}
@@ -147,6 +129,7 @@ export default function ContactForm() {
 
               <TextareaField
                 label="Qu'est-ce qui, te connaissant, pourrait t'en empêcher ? Qu'est-ce qui fait que tu n'as pas encore atteint ces objectifs ?"
+                name="Obstacles"
                 hint="Ex : procrastination, peur du jugement, manque de discipline, perfectionnisme, doute de soi…"
                 required
                 value={obstacle}
@@ -156,6 +139,7 @@ export default function ContactForm() {
 
               <TextareaField
                 label="Quel est le chiffre d'affaires mensuel de ton entreprise ?"
+                name="Chiffre d'affaires mensuel"
                 required
                 value={revenue}
                 onChange={setRevenue}
@@ -187,21 +171,21 @@ export default function ContactForm() {
                 </label>
               </div>
 
-              {status === 'error' && (
+              {state.errors && Object.keys(state.errors).length > 0 && (
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-red-500/10 border border-red-400/30 text-red-200">
                   <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm">{errorMsg}</p>
+                  <p className="text-sm">Une erreur est survenue. Vérifie ta connexion et réessaie.</p>
                 </div>
               )}
 
               <motion.button
                 type="submit"
-                disabled={status === 'loading'}
+                disabled={state.submitting}
                 className="btn-gold w-full justify-center disabled:opacity-60"
-                whileHover={{ scale: status === 'loading' ? 1 : 1.01 }}
-                whileTap={{ scale: status === 'loading' ? 1 : 0.99 }}
+                whileHover={{ scale: state.submitting ? 1 : 1.01 }}
+                whileTap={{ scale: state.submitting ? 1 : 0.99 }}
               >
-                {status === 'loading' ? (
+                {state.submitting ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
                 ) : (
                   <>
@@ -224,6 +208,7 @@ export default function ContactForm() {
 
 function Field({
   label,
+  name,
   hint,
   required,
   type = 'text',
@@ -233,6 +218,7 @@ function Field({
   placeholder,
 }: {
   label: string
+  name: string
   hint?: string
   required?: boolean
   type?: string
@@ -250,6 +236,7 @@ function Field({
       {hint && <span className="text-xs text-navy-400 mb-2 block">{hint}</span>}
       <input
         type={type}
+        name={name}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
@@ -263,6 +250,7 @@ function Field({
 
 function TextareaField({
   label,
+  name,
   hint,
   required,
   value,
@@ -270,6 +258,7 @@ function TextareaField({
   rows,
 }: {
   label: string
+  name: string
   hint?: string
   required?: boolean
   value: string
@@ -284,6 +273,7 @@ function TextareaField({
       </span>
       {hint && <span className="text-xs text-navy-400 mb-2 block italic">{hint}</span>}
       <textarea
+        name={name}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
